@@ -1,0 +1,15 @@
+services:
+  db:
+    image: mysql:8.2.0
+    container_name: notiocli-sqlite-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SQLITE_PASSWORD}
+      MYSQL_DATABASE: ${SQLITE_DB_NAME}
+      MYSQL_USER: ${SQLITE_USER}
+      MYSQL_PASSWORD: ${SQLITE_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  db_data:
