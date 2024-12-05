@@ -1,7 +1,9 @@
 package db
 
 import (
+	"NotioCLI/config"
 	"NotioCLI/pkg/applog"
+	"NotioCLI/pkg/utils"
 	"fmt"
 
 	"github.com/joho/godotenv"
@@ -9,11 +11,22 @@ import (
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+
 func Connect(envFileLoc string) (db *gorm.DB, err error) {
 	applog.Debug("Starting to connect ...")
 	dsn := getDsn(envFileLoc)
 	applog.Debug("Connecting to " + dsn)
 	return gorm.Open(mysql.Open(dsn), &gorm.Config{})
+}
+
+func ConnectMain() {
+	applog.Debug("Starting to connect ...")
+	db, err := gorm.Open(mysql.Open(getDsn(config.DevEnv())), &gorm.Config{})
+	if err != nil {
+		applog.Error(err, utils.DBConnectionError)
+	}
+	DB = db
 }
 
 func getDsn(envFileLoc string) string {
@@ -30,6 +43,6 @@ func getDsn(envFileLoc string) string {
 	dbname := envMap["MYSQL_DB_NAME"]
 	protocol := envMap["MYSQL_PROTOCOL"]
 
-	return fmt.Sprintf("%s:%s@%s(%s)/%s", user, pass, protocol, host, dbname)
+	return fmt.Sprintf("%s:%s@%s(%s)/%s?parseTime=true", user, pass, protocol, host, dbname)
 
 }
