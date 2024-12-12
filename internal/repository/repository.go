@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"NotioCLI/db"
-	"NotioCLI/models"
-	"NotioCLI/pkg/applog"
+	"tdlst/db"
+	"tdlst/models"
+	"tdlst/pkg/applog"
 	"time"
 
 	"gorm.io/gorm"

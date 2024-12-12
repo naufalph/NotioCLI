@@ -21,3 +21,7 @@ MYSQL_PROTOCOL=tcp
 func DevEnv() string {
 	return "../.env" //Enter your dev environment
 }
+
+func RealEnv() string {
+	return ".env"
+}

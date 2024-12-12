@@ -1,10 +1,10 @@
 package db
 
 import (
-	"NotioCLI/config"
-	"NotioCLI/pkg/applog"
-	"NotioCLI/pkg/utils"
 	"fmt"
+	"tdlst/config"
+	"tdlst/pkg/applog"
+	"tdlst/pkg/utils"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
@@ -21,8 +21,7 @@ func Connect(envFileLoc string) (db *gorm.DB, err error) {
 }
 
 func ConnectMain() {
-	applog.Debug("Starting to connect ...")
-	db, err := gorm.Open(mysql.Open(getDsn(config.DevEnv())), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(getDsn(config.RealEnv())), &gorm.Config{})
 	if err != nil {
 		applog.Error(err, utils.DBConnectionError)
 	}

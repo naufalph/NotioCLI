@@ -1,15 +1,15 @@
 package test
 
 import (
-	"NotioCLI/config"
-	"NotioCLI/db"
-	"NotioCLI/internal/repository"
-	"NotioCLI/models"
-	"NotioCLI/pkg/applog"
-	"NotioCLI/pkg/utils"
 	"fmt"
 	"math/rand"
 	"os"
+	"tdlst/config"
+	"tdlst/db"
+	"tdlst/internal/repository"
+	"tdlst/models"
+	"tdlst/pkg/applog"
+	"tdlst/pkg/utils"
 	"testing"
 	"time"
 

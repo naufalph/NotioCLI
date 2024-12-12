@@ -1,4 +1,4 @@
-module NotioCLI
+module tdlst
 
 go 1.23.3
 
@@ -16,6 +16,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
+	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rodaine/table v1.3.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect

@@ -1,9 +1,9 @@
 package test
 
 import (
-	"NotioCLI/config"
-	"NotioCLI/db"
-	"NotioCLI/pkg/applog"
+	"tdlst/config"
+	"tdlst/db"
+	"tdlst/pkg/applog"
 	"testing"
 )
 

@@ -13,8 +13,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "NotioCLI",
 	Short: "NotioCLI is a lightweight, command-line to-do list application built with Go, designed for seamless integration with Notion’s database. It enables users to manage tasks directly from the terminal, providing a fast, distraction-free workflow for task organization",
-	Long: `
-	NotioCLI is a lightweight, command-line to-do list application built with Go, designed for seamless integration with Notion’s database. It enables users to manage tasks directly from the terminal, providing a fast, distraction-free workflow for task organization
+	Long: `NotioCLI is a lightweight, command-line to-do list application built with Go, designed for seamless integration with Notion’s database. It enables users to manage tasks directly from the terminal, providing a fast, distraction-free workflow for task organization
 	Key features include:
 
 	- Create, Read, Update, Delete (CRUD) functionality for tasks in a Notion table.
