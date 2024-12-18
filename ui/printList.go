@@ -22,6 +22,10 @@ func PrintListNew(listType string, tasks []m.Task) {
 	table.Render()
 }
 
+func PrintLine(line string) {
+	fmt.Println(line)
+}
+
 func boldify(text string) string {
 	if text == "" {
 		return ""

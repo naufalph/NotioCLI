@@ -3,6 +3,7 @@ package applog
 import (
 	"fmt"
 	"log"
+	"os"
 )
 
 const (
@@ -13,7 +14,17 @@ const (
 	FatalLevel = "FATAL"
 )
 
-func cusomLog(logLevel string, err error, errorMsg string) {
+func InitLog() {
+	logFile, err := os.OpenFile("applog.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	if err != nil {
+		log.Fatalf("Failed to open log file: %v", err)
+	}
+
+	log.SetOutput(logFile)
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+}
+
+func customLog(logLevel string, err error, errorMsg string) {
 	if err != nil {
 		log.Println(generateErrMsgFormal(logLevel, err, errorMsg))
 	} else {
@@ -22,15 +33,16 @@ func cusomLog(logLevel string, err error, errorMsg string) {
 }
 
 func Debug(errorMsg string) {
-	cusomLog(DebugLevel, nil, errorMsg)
+	customLog(DebugLevel, nil, errorMsg)
 }
 
 func Error(err error, errorMsg string) {
-	cusomLog(ErrorLevel, err, errorMsg)
+	customLog(ErrorLevel, err, errorMsg)
+	log.Fatalln()
 }
 
 func Info(err error, errorMsg string) {
-	cusomLog(InfoLevel, err, errorMsg)
+	customLog(InfoLevel, err, errorMsg)
 }
 
 func generateErrMsgFormal(logLevel string, err error, errorMsg string) string {

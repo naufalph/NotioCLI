@@ -46,3 +46,12 @@ func ReadTaskToday(dbTest *gorm.DB) ([]models.Task, error) {
 	}
 	return tasks, nil
 }
+
+func WriteTask(dbTest *gorm.DB, task models.Task) error {
+	dbUse := dbTest
+	if dbTest == nil {
+		dbUse = db.DB
+	}
+	result := dbUse.Create(&task)
+	return result.Error
+}

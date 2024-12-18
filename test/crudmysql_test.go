@@ -45,6 +45,16 @@ func TestReadTask(t *testing.T) {
 	}
 }
 
+func TestWriteTask(t *testing.T) {
+	task := randomTaskData()
+	err := repository.WriteTask(testDB, task)
+	if err != nil {
+		applog.Error(err, "Error in repository.WriteTask test")
+		t.Fatal()
+	}
+	fmt.Printf("\n%v %v %v \n", task.CreatedAt, task.Description, task.Status)
+}
+
 func injectTaskData(testDB *gorm.DB) error {
 	task := randomTaskData()
 	result := testDB.Create(&task)
