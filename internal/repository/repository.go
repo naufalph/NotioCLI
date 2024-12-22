@@ -1,15 +1,17 @@
 package repository
 
 import (
+	"errors"
 	"tdlst/db"
 	"tdlst/models"
+	m "tdlst/models"
 	"tdlst/pkg/applog"
 	"time"
 
 	"gorm.io/gorm"
 )
 
-func ReadTaskToday(dbTest *gorm.DB) ([]models.Task, error) {
+func ReadTaskToday(dbTest *gorm.DB) ([]m.Task, error) {
 	dbUse := dbTest
 	if dbTest == nil {
 		dbUse = db.DB
@@ -26,9 +28,9 @@ func ReadTaskToday(dbTest *gorm.DB) ([]models.Task, error) {
 	}
 	defer rows.Close()
 
-	var tasks []models.Task
+	var tasks []m.Task
 	for rows.Next() {
-		var task models.Task
+		var task m.Task
 		err := rows.Scan(
 			&task.ID,
 			&task.CreatedAt,
@@ -47,11 +49,42 @@ func ReadTaskToday(dbTest *gorm.DB) ([]models.Task, error) {
 	return tasks, nil
 }
 
-func WriteTask(dbTest *gorm.DB, task models.Task) error {
+func WriteTask(dbTest *gorm.DB, task m.Task) error {
 	dbUse := dbTest
 	if dbTest == nil {
 		dbUse = db.DB
 	}
 	result := dbUse.Create(&task)
 	return result.Error
+}
+
+func EditTask(dbTest *gorm.DB, task *m.Task, status m.TaskStatus) error {
+	dbUse := dbTest
+	if dbTest == nil {
+		dbUse = db.DB
+	}
+	//test if exist
+	if err := dbUse.First(&task).Error; err != nil {
+		return err
+	}
+	task.Status = status
+	return dbUse.Save(&task).Error
+}
+
+func FindById(dbTest *gorm.DB, ID uint16) (*m.Task, error) {
+	dbUse := dbTest
+	if dbTest == nil {
+		dbUse = db.DB
+	}
+	var task models.Task
+	result := dbUse.First(&task, ID)
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		return nil, errors.New("task not found")
+	}
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &task, nil
 }

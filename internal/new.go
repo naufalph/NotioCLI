@@ -5,7 +5,6 @@ import (
 	"tdlst/internal/repository"
 	m "tdlst/models"
 	"tdlst/pkg/applog"
-	"tdlst/pkg/utils"
 	"tdlst/ui"
 	"time"
 )
@@ -20,6 +19,14 @@ func WriteTask(task []string) {
 		applog.Error(err, "Error in repository.WriteTask test")
 	}
 	ui.PrintLine("Task has been added !")
+}
+
+func DefWriteExplanation() {
+	ui.PrintLine(`Invalid Input, to write the new command use description after the command
+Example:
+tdlist new "Harus bangun pagi" 2006-01-02
+-> tdlist new [description] [task due date]
+	`)
 }
 
 func parseTask(task []string) (m.Task, error) {
@@ -44,6 +51,6 @@ func parseTask(task []string) (m.Task, error) {
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
 		DueDate:     dueDate,
-		Status:      utils.StatusNotStarted,
+		Status:      m.StatusNotStarted,
 	}, err
 }

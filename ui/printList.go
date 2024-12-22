@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"strings"
 	m "tdlst/models"
-	"tdlst/pkg/utils"
 
 	"github.com/olekukonko/tablewriter"
 )
@@ -52,11 +51,11 @@ type TaskVO struct {
 
 func ConvertToTaskVO(task m.Task) TaskVO {
 	return TaskVO{
-		ID:          strconv.FormatUint(uint64(task.ID), 6),
+		ID:          strconv.FormatUint(uint64(task.ID), 10),
 		Description: task.Description,
 		CreatedAt:   task.CreatedAt.Format("02 Jan 2006"),
 		DueDate:     task.DueDate.Format("02 Jan 2006"),
-		Status:      task.Status,
+		Status:      string(task.Status),
 	}
 }
 func addRowBasedOnStatus(taskVO TaskVO) []string {
@@ -67,7 +66,7 @@ func addRowBasedOnStatus(taskVO TaskVO) []string {
 		taskVO.DueDate,
 		taskVO.Status,
 	}
-	if strings.Compare(utils.StatusDone, taskVO.Status) == 0 {
+	if strings.Compare(string(m.StatusDone), taskVO.Status) == 0 {
 		for i := 1; i < len(resultArray); i++ {
 			resultArray[i] = strikeThrough(resultArray[i])
 		}

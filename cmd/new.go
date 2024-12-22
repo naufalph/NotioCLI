@@ -23,6 +23,7 @@ var newCmd = &cobra.Command{
 
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 1 {
+			internal.DefWriteExplanation()
 			applog.Error(nil, "Description is required")
 		}
 		internal.WriteTask(args)
