@@ -37,3 +37,20 @@ func ParseStatusCode(statusCode int8) m.TaskStatus {
 	applog.Debug("Status Code unrecognized")
 	return m.StatusNotStarted
 }
+
+func ParseStatusString(status string) m.TaskStatus {
+	switch status {
+	case string(m.StatusNotStarted):
+		return m.StatusNotStarted
+	case string(m.StatusDone):
+		return m.StatusDone
+	case string(m.StatusInProgress):
+		return m.StatusInProgress
+	case string(m.StatusOverDue):
+		return m.StatusOverDue
+	case string(m.StatusOverDueExtra):
+		return m.StatusOverDueExtra
+	}
+	applog.Debug("Status Code unrecognized")
+	return m.StatusNotStarted
+}

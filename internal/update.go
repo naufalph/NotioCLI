@@ -32,7 +32,7 @@ func UpdateTask(statusCode int8, ID uint16) error {
 		applog.Error(err, "Wrong ID")
 		return errors.New("input error")
 	}
-	return repository.EditTask(nil, task, status)
+	return repository.EditTaskStatus(nil, task, status)
 }
 
 func DefUpdateExplanation() {

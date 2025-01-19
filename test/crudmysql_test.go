@@ -58,13 +58,25 @@ func TestWriteTask(t *testing.T) {
 func TestEditTask(t *testing.T) {
 	task, _ := injectTaskData(testDB)
 	fmt.Printf("%v %v %v \n", task.ID, task.Description, task.Status)
-	repository.EditTask(testDB, &task, models.StatusDone)
+	repository.EditTaskStatus(testDB, &task, models.StatusDone)
 
 	// en passant
 	taskEdited, _ := repository.FindById(testDB, task.ID)
 	applog.Debug(fmt.Sprintf("%v %v %v \n", task.ID, task.Description, task.Status))
 	if taskEdited.Status != models.StatusDone {
 		t.Error("CUNGPRET")
+	}
+}
+
+func TestReadAll(t *testing.T) {
+	// injectTaskData(testDB)
+	tasks, err := repository.ReadTaskAll(testDB)
+	if err != nil {
+		applog.Error(err, "Error in repository.ReadTask test")
+		t.Fatal()
+	}
+	for _, toPrint := range tasks {
+		fmt.Printf("%v %v %v \n", toPrint.CreatedAt, toPrint.Description, toPrint.Status)
 	}
 }
 

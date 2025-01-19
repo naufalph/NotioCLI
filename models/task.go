@@ -14,6 +14,7 @@ type Task struct {
 	CreatedAt   time.Time  `gorm:"not null"`
 	UpdatedAt   time.Time  `gorm:"not null"`
 	Status      TaskStatus `gorm:"default:'Not Started'"`
+	NotionId    string     `gorm:"size:255;default:''"`
 }
 
 type TaskStatus string

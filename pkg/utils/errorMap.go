@@ -8,7 +8,10 @@ help ensure consistency in error logging and messaging while reducing duplicatio
 */
 
 const (
-	GeneralError      = "General Error"
-	DBConnectionError = "Fail to connect to DB"
-	DBCloseError      = "Fail to close DB"
+	GeneralError       = "General Error"
+	DBConnectionError  = "Fail to connect to DB"
+	DBCloseError       = "Fail to close DB"
+	NtnConnectionError = "Fail to connect to Notion"
+	NtnReqError        = "Fail to request to Notion"
+	ParseJsonError = "Fail to parse JSON"
 )
